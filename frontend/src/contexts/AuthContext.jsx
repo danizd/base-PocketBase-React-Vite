@@ -6,6 +6,7 @@ export const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(pb.authStore.token)
   const [user, setUser] = useState(pb.authStore.model)
+  const [isAuthLoading, setIsAuthLoading] = useState(false)
 
   useEffect(() => {
     const unsubscribe = pb.authStore.onChange((token, model) => {
@@ -19,23 +20,20 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = async (email, password) => {
+    setIsAuthLoading(true)
     try {
-      const authData = await pb.collection('users').authWithPassword(email, password)
-      setToken(pb.authStore.token)
-      setUser(pb.authStore.model)
-      return { authData, error: null }
-    } catch (error) {
-      return { authData: null, error }
+      await pb.collection('users').authWithPassword(email, password)
+    } finally {
+      setIsAuthLoading(false)
     }
   }
 
   const logout = () => {
     pb.authStore.clear()
-    setToken(null)
-    setUser(null)
   }
 
   const register = async (email, password, passwordConfirm) => {
+    setIsAuthLoading(true)
     try {
       const data = {
         email,
@@ -44,14 +42,13 @@ export const AuthProvider = ({ children }) => {
       }
       await pb.collection('users').create(data)
       await login(email, password)
-      return { error: null }
-    } catch (error) {
-      return { error }
+    } finally {
+      setIsAuthLoading(false)
     }
   }
 
   return (
-    <AuthContext.Provider value={{ token, user, login, logout, register }}>
+    <AuthContext.Provider value={{ token, user, login, logout, register, isAuthLoading }}>
       {children}
     </AuthContext.Provider>
   )

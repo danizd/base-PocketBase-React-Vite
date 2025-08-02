@@ -3,6 +3,7 @@ import LoginPage from './pages/Login'
 import DashboardPage from './pages/Dashboard'
 import AuthLayout from './components/AuthLayout'
 import GuestLayout from './components/GuestLayout'
+import RegisterPage from './pages/Register'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route element={<GuestLayout />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
         <Route element={<AuthLayout />}>
           <Route path="/" element={<DashboardPage />} />
