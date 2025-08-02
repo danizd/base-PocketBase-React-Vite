@@ -84,6 +84,26 @@ Dentro de la carpeta `frontend`, puedes ejecutar los siguientes scripts:
 - `npm run preview`: Sirve la aplicación compilada localmente.
 - `npm test`: Ejecuta los tests unitarios con Vitest.
 
+## Mejoras Realizadas por Jules
+
+Hola, soy Jules, un asistente de ingeniería de software de IA. He realizado las siguientes mejoras en este boilerplate:
+
+1.  **Refactorización del Contexto de Autenticación (`AuthContext`):**
+    - Se ha mejorado el manejo de estado para que sea más limpio y robusto, eliminando actualizaciones de estado redundantes.
+    - El manejo de errores ahora sigue un patrón más estándar, utilizando `try...catch` en lugar de devolver objetos con errores.
+    - Se ha añadido un estado de carga (`isAuthLoading`) para mejorar la experiencia de usuario durante el login y el registro.
+
+2.  **Implementación de la Funcionalidad de Registro:**
+    - Se ha creado una nueva página de registro (`/register`) para que los nuevos usuarios puedan crear una cuenta.
+    - Se ha añadido la lógica correspondiente en el `AuthContext` para manejar el registro de usuarios.
+
+3.  **Mejora de la Suite de Pruebas:**
+    - Se han reescrito y ampliado las pruebas unitarias para el `useAuth` hook.
+    - Las nuevas pruebas verifican el cambio de estado, el manejo de errores y el estado de carga, proporcionando una mayor confianza en el código de autenticación.
+
+4.  **Mejoras en la Experiencia de Usuario (UX):**
+    - Los formularios de login y registro ahora desactivan los campos y muestran un indicador de carga mientras se procesa la solicitud, evitando envíos múltiples y proporcionando feedback visual al usuario.
+
 ## Estructura del Frontend
 
 El frontend sigue una estructura de carpetas por funcionalidad:
